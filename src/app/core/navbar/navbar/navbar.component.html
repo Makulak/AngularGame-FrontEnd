@@ -1,0 +1,14 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span i18n>Angular game</span>
+
+  <div class="spacer"></div>
+
+  <ng-container *ngIf="authService.isUserLogged()">
+    <a mat-button i18n>Test</a>
+  </ng-container>
+  <ng-container *ngIf="!authService.isUserLogged()">
+    <a mat-button i18n routerLink="/sign-in">Sign in</a>
+    <a mat-raised-button i18n routerLink="/sign-up">Sign up</a>
+  </ng-container>
+
+</mat-toolbar>
