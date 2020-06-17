@@ -1,0 +1,30 @@
+.card {
+  margin-top: 30px;
+  padding: 60px 50px 40px 50px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 330px;
+}
+
+.card .full-width-input {
+  width: 100%;
+}
+
+.card .full-width-button {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.card mat-card-header {
+  text-align: center;
+  display: block;
+}
+
+.card mat-card-header mat-card-title {
+  font-size: 30px;
+}
+
+.remember-me {
+  margin-top: 10px;
+  font-weight: 200;
+}

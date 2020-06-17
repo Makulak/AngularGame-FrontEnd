@@ -7,8 +7,8 @@
     <a mat-button i18n>Test</a>
   </ng-container>
   <ng-container *ngIf="!authService.isUserLogged()">
-    <a mat-button i18n routerLink="/sign-in">Sign in</a>
-    <a mat-raised-button i18n routerLink="/sign-up">Sign up</a>
+    <a mat-button routerLink="/sign-in" i18n>Sign in</a>
+    <a mat-raised-button routerLink="/sign-up" i18n>Sign up</a>
   </ng-container>
 
 </mat-toolbar>
