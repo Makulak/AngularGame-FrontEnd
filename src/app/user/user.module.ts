@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
-  declarations: [SignInComponent],
+  declarations: [SignInComponent, SignUpComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,

@@ -4,14 +4,16 @@
       <mat-card-title i18n>Sign in</mat-card-title>
     </mat-card-header>
 
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSignIn()">
       <mat-card-content>
         <mat-form-field class="full-width-input">
-          <input matInput i18n-placeholder placeholder="Username">
+          <input matInput formControlName="username" i18n-placeholder placeholder="Username" required>
+          <mat-error *ngIf="form.username.invalid">{{getErrorMessage(form.username)}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width-input">
-          <input matInput i18n-placeholder placeholder="Password">
+          <input matInput formControlName="password" i18n-placeholder placeholder="Password" required>
+          <mat-error *ngIf="form.username.invalid">{{getErrorMessage(form.password)}}</mat-error>
         </mat-form-field>
 
         <div class="remember-me">
@@ -19,9 +21,11 @@
         </div>
       </mat-card-content>
 
-      <button mat-raised-button class="full-width-button" color="primary" i18n>Log in</button>
-      <a mat-raised-button class="full-width-button" color="accent" routerLink="/sign-up" i18n>Sign up</a>
-      <a mat-stroked-button class="full-width-button" routerLink="/reset-password" i18n>Reset password</a>
+      <mat-card-actions>
+        <button mat-raised-button class="full-width-button" color="primary" type="submit" i18n>Log in</button>
+        <a mat-raised-button class="full-width-button" color="accent" routerLink="/sign-up" i18n>Sign up</a>
+        <a mat-stroked-button class="full-width-button" routerLink="/reset-password" i18n>Reset password</a>
+      </mat-card-actions>
     </form>
   </mat-card>
 </div>
