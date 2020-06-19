@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup, AbstractControl } from '@angular/forms';
-import { getErrorMessageFromControl } from 'src/app/shared/form-control.helper';
+import { FormHelperService } from 'src/app/shared/form-helper.service';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss',
-    '../user.module.scss']
+              '../user.module.scss']
 })
 export class SignInComponent implements OnInit {
 
@@ -18,7 +18,8 @@ export class SignInComponent implements OnInit {
   submitted: boolean;
   loading: boolean;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private formHelper: FormHelperService) {
   }
 
   ngOnInit() {
@@ -34,6 +35,6 @@ export class SignInComponent implements OnInit {
   }
 
   getErrorMessage(control: AbstractControl): string {
-    return getErrorMessageFromControl(control);
+    return this.formHelper.getErrorMessage(control);
   }
 }
