@@ -24,7 +24,8 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required])
+      password: new FormControl('', [Validators.required]),
+      rememberMe: new FormControl(false)
     });
   }
 
