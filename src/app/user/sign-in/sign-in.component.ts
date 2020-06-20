@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup, AbstractControl } from '@angular/forms';
+
 import { FormHelperService } from 'src/app/shared/form-helper.service';
+import { AuthService } from 'src/app/shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,7 +22,9 @@ export class SignInComponent implements OnInit {
   loading: boolean;
 
   constructor(private formBuilder: FormBuilder,
-              private formHelper: FormHelperService) {
+              private formHelper: FormHelperService,
+              private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -31,7 +36,12 @@ export class SignInComponent implements OnInit {
   }
 
   onSignIn() {
-
+    this.authService.login(this.form.username.value, this.form.password.value, this.form.rememberMe.value)
+    .subscribe({
+      next: () => {
+        this.router.navigate(['']);
+      }
+    });
   }
 
   getErrorMessage(control: AbstractControl): string {

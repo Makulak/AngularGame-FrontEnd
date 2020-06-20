@@ -19,7 +19,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       .pipe(catchError(error => {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
-            return throwError('No internet');
+            return throwError(`Server is offline`);
           } else if (error.status === 500) {
             if (environment.production) {
               return throwError('500 - ServerError');

@@ -1,14 +1,14 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
-  <span i18n>Angular game</span>
+  <span>{{'ApplicationTitle' | translate}}</span>
 
   <div class="spacer"></div>
 
   <ng-container *ngIf="authService.isUserLogged()">
-    <a mat-button i18n>Test</a>
+    <a mat-button>Test</a>
   </ng-container>
   <ng-container *ngIf="!authService.isUserLogged()">
-    <a mat-button routerLink="/sign-in" i18n>Sign in</a>
-    <a mat-raised-button routerLink="/sign-up" i18n>Sign up</a>
+    <a mat-button routerLink="/sign-in">{{'Button.SignIn' | translate}}</a>
+    <a mat-raised-button routerLink="/sign-up"> {{'Button.SignUp' | translate}}</a>
   </ng-container>
 
 </mat-toolbar>

@@ -1,0 +1,19 @@
+{
+  "ApplicationTitle": "Angular game EN",
+  "Button": {
+    "SignIn": "Sign in",
+    "SignUp": "Sign up",
+    "ResetPassword": "Reset password"
+  },
+  "Label": {
+    "RememberMe": "Remember me"
+  },
+  "Placeholder": {
+    "Username": "Username",
+    "Password": "Password"
+  },
+  "Title": {
+    "SignIn": "Sign in",
+    "SignUp": "Sign up"
+  }
+}

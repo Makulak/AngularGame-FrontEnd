@@ -5,9 +5,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { SignInComponent } from './sign-in/sign-in.component';
-import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserRoutingModule } from './user-routing.module';
+
+import { AngularMaterialModule } from '../angular-material/angular-material.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [SignInComponent, SignUpComponent],
@@ -20,7 +22,8 @@ import { UserRoutingModule } from './user-routing.module';
 
     UserRoutingModule,
 
-    AngularMaterialModule
+    AngularMaterialModule,
+    SharedModule
   ],
   exports: [SignInComponent]
 })

@@ -1,30 +1,30 @@
 <div fxLayoutAlign="center top">
   <mat-card class="card md-elevation-20">
     <mat-card-header>
-      <mat-card-title i18n>Sign in</mat-card-title>
+      <mat-card-title>{{'Title.SignIn' | translate}}</mat-card-title>
     </mat-card-header>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSignIn()">
       <mat-card-content>
         <mat-form-field class="full-width-input">
-          <input matInput formControlName="username" i18n-placeholder placeholder="Username" required>
+          <input matInput formControlName="username" placeholder="{{'Placeholder.Username' | translate}}" required>
           <mat-error *ngIf="form.username.invalid">{{getErrorMessage(form.username)}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width-input">
-          <input matInput formControlName="password" i18n-placeholder placeholder="Password" required>
+          <input matInput formControlName="password" placeholder="{{'Placeholder.Password' | translate}}" required>
           <mat-error *ngIf="form.username.invalid">{{getErrorMessage(form.password)}}</mat-error>
         </mat-form-field>
 
         <div class="remember-me">
-          <mat-checkbox formControlName="rememberMe" i18n>Remember me</mat-checkbox>
+          <mat-checkbox formControlName="rememberMe" >{{'Label.RememberMe' | translate}}</mat-checkbox>
         </div>
       </mat-card-content>
 
       <mat-card-actions>
-        <button mat-raised-button class="full-width-button" color="primary" type="submit" i18n>Log in</button>
-        <a mat-raised-button class="full-width-button" color="accent" routerLink="/sign-up" i18n>Sign up</a>
-        <a mat-stroked-button class="full-width-button" routerLink="/reset-password" i18n>Reset password</a>
+        <button mat-raised-button class="full-width-button" color="primary" type="submit">{{'Button.SignIn' | translate}}</button>
+        <a mat-raised-button class="full-width-button" color="accent" routerLink="/sign-up">{{'Button.SignUp' | translate}}</a>
+        <a mat-stroked-button class="full-width-button" routerLink="/reset-password">{{'Button.ResetPassword' | translate}}</a>
       </mat-card-actions>
     </form>
   </mat-card>
