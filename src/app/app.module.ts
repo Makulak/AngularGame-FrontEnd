@@ -10,8 +10,9 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
 
-import { ErrorInterceptor } from './core/error.interceptor';
+import { HttpErrorInterceptor } from './core/http-error.interceptor';
 import { StandardErrorHandler } from './core/standard-error.handler';
+import { JwtInterceptor } from './core/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { StandardErrorHandler } from './core/standard-error.handler';
   ],
   bootstrap: [AppComponent],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: ErrorHandler, useClass: StandardErrorHandler }
   ]
 })

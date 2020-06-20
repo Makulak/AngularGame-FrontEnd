@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AlertService } from './shared/alert/alert.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +8,6 @@ import { AlertService } from './shared/alert/alert.service';
 export class AppComponent {
   title = 'angular-game';
 
-  constructor(private alertService: AlertService) {
+  constructor() {
   }
 }

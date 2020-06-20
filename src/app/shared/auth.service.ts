@@ -35,6 +35,6 @@ export class AuthService {
   }
 
   isUserLogged(): boolean {
-    return this.token !== null;
+    return !!this.token;
   }
 }

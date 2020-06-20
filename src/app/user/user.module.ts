@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
   declarations: [SignInComponent, SignUpComponent],
@@ -16,6 +17,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+
+    UserRoutingModule,
 
     AngularMaterialModule
   ],

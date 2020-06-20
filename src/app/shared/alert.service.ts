@@ -10,10 +10,12 @@ export class AlertService {
   }
 
   public showSuccess(message: string) {
-    this.snackBar.open(message);
+    this.snackBar.open(message, 'X', {
+    }).onAction().subscribe(_ => this.snackBar.dismiss());
   }
 
   public showError(message: string) {
-    this.snackBar.open(message);
+    this.snackBar.open(message, 'X', {
+    }).onAction().subscribe(_ => this.snackBar.dismiss());
   }
 }

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 import { ErrorService } from './error.service';
 
 @Injectable()
-export class ErrorInterceptor implements HttpInterceptor {
+export class HttpErrorInterceptor implements HttpInterceptor {
 
   constructor(private errorService: ErrorService) {
   }
@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       .pipe(catchError(error => {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
-            return throwError('');
+            return throwError('No internet');
           } else if (error.status === 500) {
             if (environment.production) {
               return throwError('500 - ServerError');
