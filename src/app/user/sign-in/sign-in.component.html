@@ -4,7 +4,7 @@
       <mat-card-title>{{'Title.SignIn' | translate}}</mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSignIn()">
+    <form [formGroup]="signInForm" (ngSubmit)="onSignIn()">
       <mat-card-content>
         <mat-form-field class="full-width-input">
           <input matInput formControlName="username" placeholder="{{'Placeholder.Username' | translate}}" required>
@@ -12,8 +12,8 @@
         </mat-form-field>
 
         <mat-form-field class="full-width-input">
-          <input matInput formControlName="password" placeholder="{{'Placeholder.Password' | translate}}" required>
-          <mat-error *ngIf="form.username.invalid">{{getErrorMessage(form.password)}}</mat-error>
+          <input matInput type="password" formControlName="password" placeholder="{{'Placeholder.Password' | translate}}" required>
+          <mat-error *ngIf="form.password.invalid">{{getErrorMessage(form.password)}}</mat-error>
         </mat-form-field>
 
         <div class="remember-me">
@@ -23,8 +23,10 @@
 
       <mat-card-actions>
         <button mat-raised-button class="full-width-button" color="primary" type="submit">{{'Button.SignIn' | translate}}</button>
-        <a mat-raised-button class="full-width-button" color="accent" routerLink="/sign-up">{{'Button.SignUp' | translate}}</a>
-        <a mat-stroked-button class="full-width-button" routerLink="/reset-password">{{'Button.ResetPassword' | translate}}</a>
+        <div class="additional-buttons">
+          <a mat-raised-button class="full-width-button" color="accent" routerLink="/sign-up">{{'Button.SignUp' | translate}}</a>
+          <a mat-stroked-button class="full-width-button" routerLink="/reset-password">{{'Button.ResetPassword' | translate}}</a>
+        </div>
       </mat-card-actions>
     </form>
   </mat-card>

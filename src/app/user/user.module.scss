@@ -11,7 +11,7 @@
 }
 
 .card .full-width-button {
-  margin: 10px 0px 0px 0px;
+  margin: 10px 10px 0px 0px;
   width: 100%;
 }
 
@@ -22,6 +22,10 @@
 
 .card mat-card-header mat-card-title {
   font-size: 30px;
+}
+
+.additional-buttons {
+  margin-top: 35px;
 }
 
 .remember-me {

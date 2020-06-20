@@ -10,7 +10,9 @@
   },
   "Placeholder": {
     "Username": "Username",
-    "Password": "Password"
+    "Password": "Password",
+    "RepeatPassword": "Repeat password",
+    "Email": "Email"
   },
   "Title": {
     "SignIn": "Sign in",

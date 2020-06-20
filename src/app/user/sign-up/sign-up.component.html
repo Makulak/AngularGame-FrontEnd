@@ -4,14 +4,26 @@
       <mat-card-title>{{'Title.SignUp' | translate}}</mat-card-title>
     </mat-card-header>
 
-    <form>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
       <mat-card-content>
         <mat-form-field class="full-width-input">
-          <input matInput placeholder="{{'Placeholder.Username' | translate}}">
+          <input matInput formControlName="email" placeholder="{{'Placeholder.Email' | translate}}" required>
+          <mat-error *ngIf="form.email.invalid">{{getErrorMessage(form.email)}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width-input">
-          <input matInput placeholder="{{'Placeholder.Password' | translate}}">
+          <input matInput formControlName="username" placeholder="{{'Placeholder.Username' | translate}}" required>
+          <mat-error *ngIf="form.username.invalid">{{getErrorMessage(form.username)}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input">
+          <input matInput formControlName="password" type="password" placeholder="{{'Placeholder.Password' | translate}}" required>
+          <mat-error *ngIf="form.password.invalid">{{getErrorMessage(form.password)}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width-input">
+          <input matInput formControlName="repeatPassword" type="password" placeholder="{{'Placeholder.RepeatPassword' | translate}}" required>
+          <mat-error *ngIf="form.repeatPassword.invalid">{{getErrorMessage(form.repeatPassword)}}</mat-error>
         </mat-form-field>
       </mat-card-content>
 

@@ -13,13 +13,10 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
 
-  loginForm: FormGroup;
+  signInForm: FormGroup;
   get form() {
-    return this.loginForm.controls;
+    return this.signInForm.controls;
   }
-
-  submitted: boolean;
-  loading: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private formHelper: FormHelperService,
@@ -28,7 +25,7 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
+    this.signInForm = this.formBuilder.group({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       rememberMe: new FormControl(false)
@@ -36,10 +33,14 @@ export class SignInComponent implements OnInit {
   }
 
   onSignIn() {
-    this.authService.login(this.form.username.value, this.form.password.value, this.form.rememberMe.value)
+    if (this.signInForm.invalid) {
+      return;
+    }
+
+    this.authService.signIn(this.form.username.value, this.form.password.value, this.form.rememberMe.value)
     .subscribe({
       next: () => {
-        this.router.navigate(['']);
+        this.router.navigate(['.']);
       }
     });
   }

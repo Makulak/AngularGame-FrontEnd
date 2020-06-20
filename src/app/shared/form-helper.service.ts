@@ -15,6 +15,10 @@ export class FormHelperService {
 
     if (control.errors.required) {
       return 'Field is required';
+    } else if (control.errors.email) {
+      return 'Filed is not correct email address';
+    } else if (control.errors.mustMatch) {
+      return 'Fileds do not match';
     }
   }
 }
