@@ -5,6 +5,10 @@
     "SignUp": "Sign up",
     "ResetPassword": "Reset password"
   },
+  "Info": {
+    "AccountCreated": "Account created. Now You can sign in.",
+    "ResetPasswordEmailSent":"Check email for instructions."
+  },
   "Label": {
     "RememberMe": "Remember me"
   },
@@ -16,6 +20,7 @@
   },
   "Title": {
     "SignIn": "Sign in",
-    "SignUp": "Sign up"
+    "SignUp": "Sign up",
+    "RequestResetPassword":"Request reset password"
   }
 }

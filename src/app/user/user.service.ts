@@ -21,4 +21,16 @@ export class UserService {
       password
     });
   }
+
+  requestResetPassword(email: string) {
+    return this.http.post(this.baseUrl + '/request-reset-password', {
+      email
+    });
+  }
+
+  setNewPassword(email: string, password: string, token: string) {
+    return this.http.post(this.baseUrl + '/confirm-reset-password', {
+      email
+    });
+  }
 }

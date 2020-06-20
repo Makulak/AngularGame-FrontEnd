@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { FormHelperService } from 'src/app/shared/form-helper.service';
 import { UserService } from '../user.service';
 import { MustMatch } from 'src/app/shared/must-match.validator';
+import { AlertService } from 'src/app/shared/alert.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,7 +24,9 @@ export class SignUpComponent implements OnInit {
   constructor(private userService: UserService,
               private formBuilder: FormBuilder,
               private router: Router,
-              private formHelper: FormHelperService) { }
+              private formHelper: FormHelperService,
+              private alertService: AlertService,
+              private translate: TranslateService) { }
 
   ngOnInit(): void {
     this.signUpForm = this.formBuilder.group({
@@ -36,10 +40,15 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUp() {
+    if (this.signUpForm.invalid) {
+      return;
+    }
+
     this.userService.signUp(this.form.email.value, this.form.username.value, this.form.password.value)
       .subscribe({
         next: () => {
-          this.router.navigate(['login']);
+          this.alertService.showSuccess(this.translate.instant('Info.AccountCreated'));
+          this.router.navigate(['/sign-in']);
         }
       });
   }

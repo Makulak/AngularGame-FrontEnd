@@ -22,7 +22,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   signIn(username: string, password: string, rememberMe: boolean): Observable<any> {
-    return this.http.post(this.baseUrl + '/login', {
+    return this.http.post(this.baseUrl + '/signin', {
       username,
       password
     }).pipe(map(response => {

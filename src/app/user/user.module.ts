@@ -10,9 +10,14 @@ import { UserRoutingModule } from './user-routing.module';
 
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { SharedModule } from '../shared/shared.module';
+import { RequestResetPasswordComponent } from './request-reset-password/request-reset-password.component';
 
 @NgModule({
-  declarations: [SignInComponent, SignUpComponent],
+  declarations: [
+    SignInComponent,
+    SignUpComponent,
+    RequestResetPasswordComponent
+  ],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -25,6 +30,6 @@ import { SharedModule } from '../shared/shared.module';
     AngularMaterialModule,
     SharedModule
   ],
-  exports: [SignInComponent]
+  exports: []
 })
 export class UserModule { }
