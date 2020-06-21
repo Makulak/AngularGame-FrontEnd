@@ -1,12 +1,13 @@
 import { AbstractControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormHelperService {
 
-  constructor() { }
+  constructor(private translate: TranslateService) { }
 
   getErrorMessage(control: AbstractControl): string {
     if (!control.hasError) {
@@ -14,11 +15,11 @@ export class FormHelperService {
     }
 
     if (control.errors.required) {
-      return 'Field is required';
+      return this.translate.instant('Info.FieldIsRequired');
     } else if (control.errors.email) {
-      return 'Filed is not correct email address';
+      return this.translate.instant('Info.FieldIsNotEmail');
     } else if (control.errors.mustMatch) {
-      return 'Fileds do not match';
+      return this.translate.instant('Info.FieldsDoNotMatch');
     }
   }
 }

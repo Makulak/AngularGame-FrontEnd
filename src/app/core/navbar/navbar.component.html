@@ -1,10 +1,10 @@
 <mat-toolbar color="primary" class="mat-elevation-z6">
-  <span>{{'ApplicationTitle' | translate}}</span>
+  <span>{{'Title.ApplicationName' | translate}}</span>
 
   <div class="spacer"></div>
 
   <ng-container *ngIf="authService.isUserLogged()">
-    <a mat-button>Test</a>
+    <button mat-button (click)="SignOut()">Sign out</button>
   </ng-container>
   <ng-container *ngIf="!authService.isUserLogged()">
     <a mat-button routerLink="/sign-in">{{'Button.SignIn' | translate}}</a>

@@ -1,5 +1,4 @@
 {
-  "ApplicationTitle": "Angular game EN",
   "Button": {
     "SignIn": "Sign in",
     "SignUp": "Sign up",
@@ -7,7 +6,10 @@
   },
   "Info": {
     "AccountCreated": "Account created. Now You can sign in.",
-    "ResetPasswordEmailSent":"Check email for instructions."
+    "ResetPasswordEmailSent":"Check email for instructions.",
+    "FieldIsRequired": "Field is required",
+    "FieldIsNotEmail":"Field is not valid email address",
+    "FieldsDoNotMatch":"Fields do not match"
   },
   "Label": {
     "RememberMe": "Remember me"
@@ -19,6 +21,7 @@
     "Email": "Email"
   },
   "Title": {
+    "ApplicationName": "Angular Game EN",
     "SignIn": "Sign in",
     "SignUp": "Sign up",
     "RequestResetPassword":"Request reset password"

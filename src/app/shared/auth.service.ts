@@ -22,16 +22,20 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   signIn(username: string, password: string, rememberMe: boolean): Observable<any> {
-    return this.http.post(this.baseUrl + '/signin', {
+    return this.http.post<any>(this.baseUrl + '/signin', {
       username,
       password
     }).pipe(map(response => {
-      // TODO: Save token
+      this.token = response.token;
+      if (rememberMe) {
+        localStorage.setItem('token', response.token);
+      }
     }));
   }
 
-  logout() {
+  signOut() {
     this.token = null;
+    localStorage.removeItem('token');
   }
 
   isUserLogged(): boolean {
