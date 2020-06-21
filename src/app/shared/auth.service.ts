@@ -38,7 +38,7 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
-  isUserLogged(): boolean {
+  get isUserLogged(): boolean {
     return !!this.token;
   }
 }

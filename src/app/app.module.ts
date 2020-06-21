@@ -16,6 +16,7 @@ import { UserModule } from './user/user.module';
 import { HttpErrorInterceptor } from './core/http-error.interceptor';
 import { StandardErrorHandler } from './core/standard-error.handler';
 import { JwtInterceptor } from './core/jwt.interceptor';
+import { RoomsModule } from './rooms/rooms.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { JwtInterceptor } from './core/jwt.interceptor';
 
     CoreModule,
     SharedModule,
-    UserModule
+    UserModule,
+    RoomsModule
   ],
   bootstrap: [AppComponent],
   providers: [
