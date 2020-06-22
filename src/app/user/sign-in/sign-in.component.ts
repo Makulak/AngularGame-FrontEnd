@@ -26,7 +26,7 @@ export class SignInComponent implements OnInit {
 
   ngOnInit() {
     this.signInForm = this.formBuilder.group({
-      username: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
       rememberMe: new FormControl(false)
     });
@@ -37,10 +37,10 @@ export class SignInComponent implements OnInit {
       return;
     }
 
-    this.authService.signIn(this.form.username.value, this.form.password.value, this.form.rememberMe.value)
+    this.authService.signIn(this.form.email.value, this.form.password.value, this.form.rememberMe.value)
     .subscribe({
       next: () => {
-        this.router.navigate(['.']);
+        this.router.navigate(['/rooms']);
       }
     });
   }

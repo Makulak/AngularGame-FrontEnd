@@ -10,7 +10,9 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
 
-  private baseUrl = environment.baseUrl + '/auth';
+  private get baseUrl() {
+    return environment.baseUrl + '/auth';
+  }
 
   constructor(private http: HttpClient) { }
 

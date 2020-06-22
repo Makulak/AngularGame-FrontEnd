@@ -5,8 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class LoggerService {
 
+  // TODO: Better way to log errors
+
   public logError(message: string) {
-    // TODO: Better way to log errors
     console.log('Error: ' + message);
+  }
+
+  public logInformation(message: string) {
+    console.log('Info: ' + message);
   }
 }

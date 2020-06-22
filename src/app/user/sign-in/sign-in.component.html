@@ -7,8 +7,8 @@
     <form [formGroup]="signInForm" (ngSubmit)="onSignIn()">
       <mat-card-content>
         <mat-form-field class="full-width-input">
-          <input matInput formControlName="username" placeholder="{{'Placeholder.Username' | translate}}" required>
-          <mat-error *ngIf="form.username.invalid">{{getErrorMessage(form.username)}}</mat-error>
+          <input matInput formControlName="email" placeholder="{{'Placeholder.Email' | translate}}" required>
+          <mat-error *ngIf="form.email.invalid">{{getErrorMessage(form.email)}}</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width-input">

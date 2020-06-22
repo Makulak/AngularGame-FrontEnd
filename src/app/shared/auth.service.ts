@@ -11,7 +11,9 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  private baseUrl = environment.baseUrl + '/auth';
+  private get baseUrl() {
+    return environment.baseUrl + '/auth';
+  }
 
   private token: string;
 
@@ -21,9 +23,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  signIn(username: string, password: string, rememberMe: boolean): Observable<any> {
+  signIn(email: string, password: string, rememberMe: boolean): Observable<any> {
     return this.http.post<any>(this.baseUrl + '/signin', {
-      username,
+      email,
       password
     }).pipe(map(response => {
       this.token = response.token;
