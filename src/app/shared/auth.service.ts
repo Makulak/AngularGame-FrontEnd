@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   private get baseUrl() {
-    return environment.baseUrl + '/auth';
+    return environment.baseUrl + 'api/auth';
   }
 
   private token: string;

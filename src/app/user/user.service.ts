@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 export class UserService {
 
   private get baseUrl() {
-    return environment.baseUrl + '/auth';
+    return environment.baseUrl + 'api/auth';
   }
 
   constructor(private http: HttpClient) { }

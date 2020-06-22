@@ -3,6 +3,7 @@ import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 
 import { environment } from 'src/environments/environment';
 import { LoggerService } from '../core/logger.service';
+import { AuthService } from '../shared/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +11,17 @@ import { LoggerService } from '../core/logger.service';
 export class RoomsService {
 
   private get baseUrl() {
-    return environment.baseUrl + '/rooms';
+    return environment.baseUrl + 'hub/rooms';
   }
 
   private hubConnection: HubConnection;
 
-  constructor(private logger: LoggerService) { }
+  constructor(private logger: LoggerService,
+              private authService: AuthService) { }
 
   public setConnection() {
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl(this.baseUrl)
+      .withUrl(this.baseUrl, { accessTokenFactory: () => this.authService.Token })
       .build();
 
     this.hubConnection.on('onPlayerEnter', (data) => this.onPlayerEnter(data));
@@ -33,7 +35,7 @@ export class RoomsService {
       .then(() => {
         this.logger.logInformation('Room connection started');
         this.hubConnection.invoke('PlayerEntered');
-        this.hubConnection.invoke('GetRooms', [{skip: 0}, {take: 0}]);
+        // this.hubConnection.invoke('GetRooms', [{skip: 0}, {take: 0}]);
       });
   }
 
