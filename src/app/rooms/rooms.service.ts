@@ -47,7 +47,7 @@ export class RoomsService {
   }
 
   private onPlayerEnter(data: any) {
-    this.logger.logInformation(data);
+    this.logger.logInformation(data.playerCount);
   }
 
   private onPlayerLeave(data: any) {

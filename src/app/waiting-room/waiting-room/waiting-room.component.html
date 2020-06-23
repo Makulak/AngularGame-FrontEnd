@@ -1,0 +1,42 @@
+<h1>
+  Ilość graczy: {{playersCount}}
+</h1>
+
+<h1>
+  Pokoje:
+</h1>
+
+<table>
+  <thead>
+    <tr>
+      <td>
+        Id
+      </td>
+      <td>
+        Name
+      </td>
+      <td>
+        Options
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor = "let room of rooms">
+      <td>
+        {{room.id}}
+      </td>
+      <td>
+        {{room.name}}
+      </td>
+      <td>
+        <button (click)="removeRoom(room.name)">Remove</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button (click)="start()">Start connection</button>
+<button (click)="stop()">Stop connection</button>
+
+<input [(ngModel)]="roomName">
+<button (click)="addRoom()">Add room</button>

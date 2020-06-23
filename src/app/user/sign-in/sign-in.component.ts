@@ -40,7 +40,7 @@ export class SignInComponent implements OnInit {
     this.authService.signIn(this.form.email.value, this.form.password.value, this.form.rememberMe.value)
     .subscribe({
       next: () => {
-        this.router.navigate(['/rooms']);
+        this.router.navigate(['/waiting-room']);
       }
     });
   }
