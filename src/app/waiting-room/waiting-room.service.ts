@@ -6,6 +6,7 @@ import { LoggerService } from '../core/logger.service';
 import { AuthService } from '../shared/auth.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Room } from './room.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -41,13 +42,14 @@ export class WaitingRoomService {
     this.hubConnection.on('updatePlayerCount', (data) => {
       this.onUpdatePlayerCount(data);
     });
-    this.hubConnection.on('updateAllRooms', (data) => {
-      this.onUpdateAllRooms(data);
+    this.hubConnection.on('updateAllRooms', (data: any[]) => {
+      const rooms = data.map(room => new Room().convertFrom(room));
+      this.onUpdateAllRooms(rooms);
     });
     this.hubConnection.on('roomRemoved', (data) => {
       this.onRoomRemoved(data);
     });
-    this.hubConnection.on('roomAdded', (data) => {
+    this.hubConnection.on('roomAdded', (data: Room) => {
       this.onRoomAdded(data);
     });
   }
@@ -65,11 +67,12 @@ export class WaitingRoomService {
       .then(() => {
         this.logger.logInformation('Room connection stopped');
         this.playerCountSubj.next(undefined);
+        this.roomsSubj.next(null);
       });
   }
 
-  public addRoom(roomName: string) {
-    this.hubConnection.invoke('AddRoom', roomName);
+  public addRoom(roomName: string, password: string) {
+    this.hubConnection.invoke('AddRoom', roomName, password);
   }
 
   public removeRoom(roomName: string) {
@@ -83,12 +86,12 @@ export class WaitingRoomService {
     this.playerCountSubj.next(count);
   }
 
-  private onUpdateAllRooms(data: any) {
+  private onUpdateAllRooms(data: Room[]) {
     this.logger.logInformation(JSON.stringify(data));
     this.roomsSubj.next(data);
   }
 
-  private onRoomAdded(data: any) {
+  private onRoomAdded(data: Room) {
     this.logger.logInformation(JSON.stringify(data));
     let rooms = Object.assign([], this.roomsSubj.value);
     if (!rooms) {

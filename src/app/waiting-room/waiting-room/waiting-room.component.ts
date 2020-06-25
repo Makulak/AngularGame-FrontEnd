@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WaitingRoomService } from '../waiting-room.service';
 import { Subscription } from 'rxjs';
-import { Room } from '../room.model';
+
+import { WaitingRoomService } from '../waiting-room.service';
 
 @Component({
   selector: 'app-waiting-room',
@@ -13,10 +13,8 @@ export class WaitingRoomComponent implements OnInit, OnDestroy {
   playersCountSub: Subscription;
   playersCount: number;
 
-  roomsSub: Subscription;
-  rooms: Room[];
-
   roomName: string;
+  roomPassword: string;
 
   constructor(private waitingRoomService: WaitingRoomService) { }
 
@@ -24,17 +22,11 @@ export class WaitingRoomComponent implements OnInit, OnDestroy {
     this.playersCountSub = this.waitingRoomService.playerCount$.subscribe(count => {
         this.playersCount = count;
     });
-
-    this.roomsSub = this.waitingRoomService.rooms$.subscribe(rooms => {
-      this.rooms = Object.assign([], rooms);
-    });
-
     this.waitingRoomService.setConnection();
   }
 
   ngOnDestroy(): void {
     this.playersCountSub.unsubscribe();
-    this.roomsSub.unsubscribe();
   }
 
   start() {
@@ -46,7 +38,7 @@ export class WaitingRoomComponent implements OnInit, OnDestroy {
   }
 
   addRoom() {
-    this.waitingRoomService.addRoom(this.roomName);
+    this.waitingRoomService.addRoom(this.roomName, this.roomPassword);
   }
 
   removeRoom(name: string) {

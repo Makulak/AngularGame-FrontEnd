@@ -6,10 +6,10 @@
   },
   "Info": {
     "AccountCreated": "Account created. Now You can sign in.",
-    "ResetPasswordEmailSent":"Check email for instructions.",
+    "ResetPasswordEmailSent": "Check email for instructions.",
     "FieldIsRequired": "Field is required",
-    "FieldIsNotEmail":"Field is not valid email address",
-    "FieldsDoNotMatch":"Fields do not match"
+    "FieldIsNotEmail": "Field is not valid email address",
+    "FieldsDoNotMatch": "Fields do not match"
   },
   "Label": {
     "RememberMe": "Remember me"
@@ -24,6 +24,7 @@
     "ApplicationName": "Angular Game EN",
     "SignIn": "Sign in",
     "SignUp": "Sign up",
-    "RequestResetPassword":"Request reset password"
+    "RequestResetPassword": "Request reset password",
+    "AvailableRooms": "Dostępne pokoje"
   }
 }

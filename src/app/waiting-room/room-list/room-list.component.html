@@ -1,0 +1,10 @@
+<div class="list-wrapper">
+  <span class="list-title">{{'Title.AvailableRooms' | translate}}</span>
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let room of rooms" (click)="roomSelected(room.id)">
+      <p class="list-line-header" matLine> {{room.name}} - ({{room.status}}) </p>
+      <p class="list-line-secondary" matLine>Gracze ({{room.playersCount}} / {{room.maxPlayersCount}}):
+        {{room.playerNames}} </p>
+    </mat-list-option>
+  </mat-selection-list>
+</div>
