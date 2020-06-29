@@ -1,30 +1,32 @@
 {
   "Button": {
+    "CreateRoom": "Utwórz pokój",
     "SignIn": "Sign in",
     "SignUp": "Sign up",
     "ResetPassword": "Reset password"
   },
   "Info": {
     "AccountCreated": "Account created. Now You can sign in.",
-    "ResetPasswordEmailSent": "Check email for instructions.",
-    "FieldIsRequired": "Field is required",
     "FieldIsNotEmail": "Field is not valid email address",
-    "FieldsDoNotMatch": "Fields do not match"
+    "FieldIsRequired": "Field is required",
+    "FieldsDoNotMatch": "Fields do not match",
+    "ResetPasswordEmailSent": "Check email for instructions."
   },
   "Label": {
     "RememberMe": "Remember me"
   },
   "Placeholder": {
-    "Username": "Username",
+    "Email": "Email",
     "Password": "Password",
     "RepeatPassword": "Repeat password",
-    "Email": "Email"
+    "RoomName": "Room name",
+    "Username": "Username"
   },
   "Title": {
     "ApplicationName": "Angular Game EN",
-    "SignIn": "Sign in",
-    "SignUp": "Sign up",
+    "AvailableRooms": "Dostępne pokoje",
     "RequestResetPassword": "Request reset password",
-    "AvailableRooms": "Dostępne pokoje"
+    "SignIn": "Sign in",
+    "SignUp": "Sign up"
   }
 }

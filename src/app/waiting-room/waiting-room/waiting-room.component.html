@@ -1,13 +1,4 @@
-<h1>
-  Ilość graczy: {{playersCount}}
-</h1>
-
-<app-room-list></app-room-list>
-
-<button (click)="start()">Start connection</button>
-<button (click)="stop()">Stop connection</button>
-
-<input [(ngModel)]="roomName" placeholder="Nazwa pokoju">
-<input [(ngModel)]="roomPassword" placeholder="Hasło">
-
-<button (click)="addRoom()">Add room</button>
+<div class="waiting-room-wrapper">
+  <app-waiting-room-controls></app-waiting-room-controls>
+  <app-room-list></app-room-list>
+</div>

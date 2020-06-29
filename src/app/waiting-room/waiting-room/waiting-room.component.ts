@@ -13,9 +13,6 @@ export class WaitingRoomComponent implements OnInit, OnDestroy {
   playersCountSub: Subscription;
   playersCount: number;
 
-  roomName: string;
-  roomPassword: string;
-
   constructor(private waitingRoomService: WaitingRoomService) { }
 
   ngOnInit(): void {
@@ -23,25 +20,11 @@ export class WaitingRoomComponent implements OnInit, OnDestroy {
         this.playersCount = count;
     });
     this.waitingRoomService.setConnection();
-  }
-
-  ngOnDestroy(): void {
-    this.playersCountSub.unsubscribe();
-  }
-
-  start() {
     this.waitingRoomService.startConnection();
   }
 
-  stop() {
+  ngOnDestroy(): void {
     this.waitingRoomService.stopConnection();
-  }
-
-  addRoom() {
-    this.waitingRoomService.addRoom(this.roomName, this.roomPassword);
-  }
-
-  removeRoom(name: string) {
-    this.waitingRoomService.removeRoom(name);
+    this.playersCountSub.unsubscribe();
   }
 }

@@ -29,5 +29,4 @@ export class RoomListComponent implements OnInit, OnDestroy {
   roomSelected(roomId: number) {
     alert(roomId);
   }
-
 }

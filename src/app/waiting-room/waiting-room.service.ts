@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@aspnet/signalr';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { LoggerService } from '../core/logger.service';
 import { AuthService } from '../shared/auth.service';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Room } from './room.model';
-import { map } from 'rxjs/operators';
+import { TicTacToeService } from './tic-tac-toe.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,19 +17,14 @@ export class WaitingRoomService {
     return environment.baseUrl + 'hub/waiting-room';
   }
 
-  private playerCountSubj: BehaviorSubject<number>;
-  public playerCount$: Observable<number>;
-
   private roomsSubj: BehaviorSubject<Room[]>;
   public rooms$: Observable<Room[]>;
 
   private hubConnection: HubConnection;
 
   constructor(private logger: LoggerService,
-              private authService: AuthService) {
-    this.playerCountSubj = new BehaviorSubject<number>(undefined);
-    this.playerCount$ = this.playerCountSubj.asObservable();
-
+              private authService: AuthService,
+              private ticTacToeService: TicTacToeService) {
     this.roomsSubj = new BehaviorSubject<Room[]>(undefined);
     this.rooms$ = this.roomsSubj.asObservable();
   }
@@ -39,22 +34,28 @@ export class WaitingRoomService {
       .withUrl(this.baseUrl, { accessTokenFactory: () => this.authService.Token })
       .build();
 
-    this.hubConnection.on('updatePlayerCount', (data) => {
-      this.onUpdatePlayerCount(data);
-    });
     this.hubConnection.on('updateAllRooms', (data: any[]) => {
       const rooms = data.map(room => new Room().convertFrom(room));
       this.onUpdateAllRooms(rooms);
     });
-    this.hubConnection.on('roomRemoved', (data) => {
+    this.hubConnection.on('removeRoom', (data: any) => {
       this.onRoomRemoved(data);
     });
-    this.hubConnection.on('roomAdded', (data: Room) => {
-      this.onRoomAdded(data);
+    this.hubConnection.on('createRoom', (data: any) => {
+      const room = new Room().convertFrom(data);
+      this.onRoomAdded(room);
+    });
+
+    this.hubConnection.on('userEnteredRoom', (data: any) => {
+      this.onUserEnteredRoom(data);
     });
   }
 
   public startConnection() {
+    if (this.hubConnection.state === HubConnectionState.Connected) {
+      return;
+    }
+
     this.hubConnection
       .start()
       .then(() => {
@@ -63,27 +64,27 @@ export class WaitingRoomService {
   }
 
   public stopConnection() {
+    if (this.hubConnection.state === HubConnectionState.Disconnected) {
+      return;
+    }
+
     this.hubConnection.stop()
       .then(() => {
         this.logger.logInformation('Room connection stopped');
-        this.playerCountSubj.next(undefined);
         this.roomsSubj.next(null);
       });
   }
 
-  public addRoom(roomName: string, password: string) {
+  public createRoom(roomName: string, password: string) {
     this.hubConnection.invoke('AddRoom', roomName, password);
   }
 
-  public removeRoom(roomName: string) {
-    this.hubConnection.invoke('RemoveRoom', roomName);
+  public removeRoom(roomId: number) {
+    this.hubConnection.invoke('RemoveRoom', roomId);
   }
 
-  private onUpdatePlayerCount(data: any) {
-    const count = data.count;
-
-    this.logger.logInformation(count);
-    this.playerCountSubj.next(count);
+  public tryEnterRoom(roomId: number) {
+    this.hubConnection.invoke('tryEnterRoom', roomId);
   }
 
   private onUpdateAllRooms(data: Room[]) {
@@ -107,5 +108,8 @@ export class WaitingRoomService {
     const rooms = Object.assign([], this.roomsSubj.value.filter(room => room.id !== data.roomId));
 
     this.roomsSubj.next(rooms);
+  }
+
+  private onUserEnteredRoom(data: any) {
   }
 }

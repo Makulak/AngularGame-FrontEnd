@@ -6,7 +6,7 @@ export class Room implements Convertable<any> {
   id: number;
   name: string;
   status: string;
-  players: Player[];
+  playersCount: number;
   maxPlayersCount: number;
   hasPassword: boolean;
 
@@ -14,26 +14,10 @@ export class Room implements Convertable<any> {
     this.id = obj.id;
     this.name = obj.name;
     this.status = obj.status;
-    this.players = obj.players.map(player => new Player().convertFrom(player));
+    this.playersCount = obj.playersCount;
     this.maxPlayersCount = obj.maxPlayersCount;
     this.hasPassword = obj.hasPassword;
 
     return this;
-  }
-
-  public get playersCount() {
-    if (!!this.players) {
-      return this.players.length;
-    } else {
-      return 0;
-    }
-  }
-
-  public get playerNames() {
-    if (!!this.players) {
-      return this.players.map(player => player.userName).join(', ');
-    } else {
-      return null;
-    }
   }
 }

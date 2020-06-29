@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,11 @@ export class ErrorService {
       if (!navigator.onLine) {
           return 'No Internet Connection';
       }
-      return error.message ? error.message : error.toString();
+      if (environment.production) {
+        return error.message ? error.message : error.toString();
+      } else {
+        return error.message + error.stack;
+      }
   }
 
   getServerErrorMessage(error: HttpErrorResponse): string {

@@ -1,0 +1,13 @@
+<div>
+  <form [formGroup]="createRoomForm" (ngSubmit)="onCreateRoom()">
+    <mat-form-field class="inline-input">
+      <input matInput formControlName="name" placeholder="{{'Placeholder.RoomName' | translate}}" required>
+      <mat-error *ngIf="form.name.invalid">{{getErrorMessage(form.name)}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="inline-input">
+      <input matInput formControlName="password" placeholder="{{'Placeholder.Password' | translate}}">
+    </mat-form-field>
+
+    <button mat-raised-button type="submit">{{'Button.CreateRoom' | translate}}</button>
+  </form>
+</div>
