@@ -10,21 +10,14 @@ import { WaitingRoomService } from '../waiting-room.service';
 })
 export class WaitingRoomComponent implements OnInit, OnDestroy {
 
-  playersCountSub: Subscription;
-  playersCount: number;
-
   constructor(private waitingRoomService: WaitingRoomService) { }
 
   ngOnInit(): void {
-    this.playersCountSub = this.waitingRoomService.playerCount$.subscribe(count => {
-        this.playersCount = count;
-    });
     this.waitingRoomService.setConnection();
     this.waitingRoomService.startConnection();
   }
 
   ngOnDestroy(): void {
     this.waitingRoomService.stopConnection();
-    this.playersCountSub.unsubscribe();
   }
 }

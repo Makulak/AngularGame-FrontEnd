@@ -11,7 +11,7 @@ import { AuthService } from '../shared/auth.service';
 export class TicTacToeService {
 
   private get baseUrl() {
-    return environment.baseUrl + 'hub/tic-tac-toe';
+    return environment.baseUrl + 'hub/game';
   }
 
   private hubConnection: HubConnection;
@@ -34,7 +34,7 @@ export class TicTacToeService {
     this.hubConnection
       .start()
       .then(() => {
-        this.logger.logInformation('TicTacToe connection started');
+        this.logger.logInformation('Game connection started');
       });
   }
 
@@ -45,7 +45,7 @@ export class TicTacToeService {
 
     this.hubConnection.stop()
       .then(() => {
-        this.logger.logInformation('TicTacToe connection stopped');
+        this.logger.logInformation('Game connection stopped');
       });
   }
 }

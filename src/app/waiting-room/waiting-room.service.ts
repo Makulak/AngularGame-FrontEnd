@@ -45,10 +45,6 @@ export class WaitingRoomService {
       const room = new Room().convertFrom(data);
       this.onRoomAdded(room);
     });
-
-    this.hubConnection.on('userEnteredRoom', (data: any) => {
-      this.onUserEnteredRoom(data);
-    });
   }
 
   public startConnection() {
@@ -76,7 +72,7 @@ export class WaitingRoomService {
   }
 
   public createRoom(roomName: string, password: string) {
-    this.hubConnection.invoke('AddRoom', roomName, password);
+    this.hubConnection.invoke('CreateRoom', { name: roomName, password } );
   }
 
   public removeRoom(roomId: number) {
@@ -84,7 +80,7 @@ export class WaitingRoomService {
   }
 
   public tryEnterRoom(roomId: number) {
-    this.hubConnection.invoke('tryEnterRoom', roomId);
+    this.hubConnection.invoke('TryEnterRoom', roomId);
   }
 
   private onUpdateAllRooms(data: Room[]) {
@@ -108,8 +104,5 @@ export class WaitingRoomService {
     const rooms = Object.assign([], this.roomsSubj.value.filter(room => room.id !== data.roomId));
 
     this.roomsSubj.next(rooms);
-  }
-
-  private onUserEnteredRoom(data: any) {
   }
 }
