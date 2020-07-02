@@ -15,7 +15,9 @@ export class WaitingRoomComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.waitingRoomService.setConnection();
-    this.hubService.startConnection();
+    this.hubService.startConnection().then(() =>
+      this.waitingRoomService.getRooms()
+    );
   }
 
   ngOnDestroy(): void {

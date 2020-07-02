@@ -27,12 +27,12 @@ export class HubService {
       .build();
   }
 
-  public startConnection() {
+  public startConnection(): Promise<void> {
     if (this.hubConnection.state === HubConnectionState.Connected) {
       return;
     }
 
-    this.hubConnection
+    return this.hubConnection
       .start()
       .then(() => {
         this.logger.logInformation('Room connection started');

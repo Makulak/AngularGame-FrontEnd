@@ -12,6 +12,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
 import { WaitingRoomModule } from './waiting-room/waiting-room.module';
+import { GameModule } from './game/game.module';
 
 import { HttpErrorInterceptor } from './core/http-error.interceptor';
 import { StandardErrorHandler } from './core/standard-error.handler';
@@ -36,7 +37,8 @@ import { JwtInterceptor } from './core/jwt.interceptor';
     CoreModule,
     SharedModule,
     UserModule,
-    WaitingRoomModule
+    WaitingRoomModule,
+    GameModule
   ],
   bootstrap: [AppComponent],
   providers: [

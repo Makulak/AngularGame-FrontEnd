@@ -20,17 +20,21 @@ export class WaitingRoomService {
   }
 
   public setConnection() {
-    this.hubService.hubConnection.on('updateAllRooms', (data: any[]) => {
+    this.hubService.hubConnection.on('updateRoomsList', (data: any[]) => {
       const rooms = data.map(room => new Room().convertFrom(room));
-      this.onUpdateAllRooms(rooms);
+      this.updateRoomsList(rooms);
     });
-    this.hubService.hubConnection.on('removeRoom', (data: any) => {
-      this.onRoomRemoved(data);
+    this.hubService.hubConnection.on('removeRoomFromList', (data: any) => {
+      this.removeRoomFromList(data);
     });
-    this.hubService.hubConnection.on('createRoom', (data: any) => {
+    this.hubService.hubConnection.on('addRoomToList', (data: any) => {
       const room = new Room().convertFrom(data);
-      this.onRoomAdded(room);
+      this.addRoomToList(room);
     });
+  }
+
+  public getRooms() {
+    this.hubService.hubConnection.invoke('GetRooms');
   }
 
   public createRoom(roomName: string, password: string) {
@@ -45,12 +49,13 @@ export class WaitingRoomService {
     this.hubService.hubConnection.invoke('TryEnterRoom', roomId);
   }
 
-  private onUpdateAllRooms(data: Room[]) {
+
+  private updateRoomsList(data: Room[]) {
     this.logger.logInformation(JSON.stringify(data));
     this.roomsSubj.next(data);
   }
 
-  private onRoomAdded(data: Room) {
+  private addRoomToList(data: Room) {
     this.logger.logInformation(JSON.stringify(data));
     let rooms = Object.assign([], this.roomsSubj.value);
     if (!rooms) {
@@ -61,7 +66,7 @@ export class WaitingRoomService {
     this.roomsSubj.next(rooms);
   }
 
-  private onRoomRemoved(data: any) {
+  private removeRoomFromList(data: any) {
     this.logger.logInformation(JSON.stringify(data));
     const rooms = Object.assign([], this.roomsSubj.value.filter(room => room.id !== data.roomId));
 
