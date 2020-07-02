@@ -5,7 +5,7 @@ import { GameComponent } from './game/game.component';
 import { LoggedGuard } from '../shared/logged.guard';
 
 const routes: Routes = [{
-  path: 'game/:gameId',
+  path: 'game/:roomId',
   component: GameComponent,
   canActivate: [LoggedGuard]
 }];

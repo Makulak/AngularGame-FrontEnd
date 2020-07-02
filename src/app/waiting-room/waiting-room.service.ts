@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { LoggerService } from '../core/logger.service';
@@ -14,7 +15,8 @@ export class WaitingRoomService {
   public rooms$: Observable<Room[]>;
 
   constructor(private logger: LoggerService,
-              private hubService: HubService) {
+              private hubService: HubService,
+              private router: Router) {
     this.roomsSubj = new BehaviorSubject<Room[]>(undefined);
     this.rooms$ = this.roomsSubj.asObservable();
   }
@@ -31,24 +33,26 @@ export class WaitingRoomService {
       const room = new Room().convertFrom(data);
       this.addRoomToList(room);
     });
+    this.hubService.hubConnection.on('tryEnterCreatedRoom', (data: any) => {
+      this.tryEnterCreatedRoom(data.roomId);
+    });
   }
 
-  public getRooms() {
-    this.hubService.hubConnection.invoke('GetRooms');
+  public getRooms(): Promise<void> {
+    return this.hubService.hubConnection.invoke('GetRooms');
   }
 
-  public createRoom(roomName: string, password: string) {
-    this.hubService.hubConnection.invoke('CreateRoom', { name: roomName, password } );
+  public createRoom(roomName: string, password: string): Promise<void> {
+    return this.hubService.hubConnection.invoke('CreateRoom', { name: roomName, password } );
   }
 
-  public removeRoom(roomId: number) {
-    this.hubService.hubConnection.invoke('RemoveRoom', roomId);
+  public removeRoom(roomId: number): Promise<void> {
+    return this.hubService.hubConnection.invoke('RemoveRoom', roomId);
   }
 
-  public tryEnterRoom(roomId: number) {
-    this.hubService.hubConnection.invoke('TryEnterRoom', roomId);
+  public tryEnterRoom(roomId: number): Promise<void> {
+    return this.hubService.hubConnection.invoke('TryEnterRoom', roomId);
   }
-
 
   private updateRoomsList(data: Room[]) {
     this.logger.logInformation(JSON.stringify(data));
@@ -71,5 +75,9 @@ export class WaitingRoomService {
     const rooms = Object.assign([], this.roomsSubj.value.filter(room => room.id !== data.roomId));
 
     this.roomsSubj.next(rooms);
+  }
+
+  private tryEnterCreatedRoom(roomId: number) {
+    this.router.navigate(['game/' + roomId]);
   }
 }

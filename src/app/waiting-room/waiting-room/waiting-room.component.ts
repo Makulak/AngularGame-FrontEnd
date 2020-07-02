@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { WaitingRoomService } from '../waiting-room.service';
 import { HubService } from 'src/app/shared/hub.service';
+import { HubConnectionState } from '@aspnet/signalr';
 
 @Component({
   selector: 'app-waiting-room',
@@ -15,12 +16,17 @@ export class WaitingRoomComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.waitingRoomService.setConnection();
-    this.hubService.startConnection().then(() =>
-      this.waitingRoomService.getRooms()
-    );
+
+    if (this.hubService.hubConnectionState === HubConnectionState.Disconnected) {
+      this.hubService.startConnection().then(() =>
+        this.waitingRoomService.getRooms()
+      );
+    } else {
+      this.waitingRoomService.getRooms();
+    }
   }
 
   ngOnDestroy(): void {
-    this.hubService.stopConnection();
+    // this.hubService.stopConnection();
   }
 }

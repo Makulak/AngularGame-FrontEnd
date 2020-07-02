@@ -19,6 +19,10 @@ export class HubService {
     return this._hubConnection;
   }
 
+  public get hubConnectionState(): HubConnectionState {
+    return this.hubConnection?.state;
+  }
+
   constructor(private logger: LoggerService,
               private authService: AuthService) {
 
@@ -28,8 +32,8 @@ export class HubService {
   }
 
   public startConnection(): Promise<void> {
-    if (this.hubConnection.state === HubConnectionState.Connected) {
-      return;
+    if (this.hubConnectionState === HubConnectionState.Connected) {
+      return null;
     }
 
     return this.hubConnection
@@ -40,7 +44,7 @@ export class HubService {
   }
 
   public stopConnection() {
-    if (this.hubConnection.state === HubConnectionState.Disconnected) {
+    if (this.hubConnectionState === HubConnectionState.Disconnected) {
       return;
     }
 
