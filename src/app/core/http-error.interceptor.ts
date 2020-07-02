@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse, HttpInterceptor } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -10,7 +11,8 @@ import { ErrorService } from './error.service';
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
 
-  constructor(private errorService: ErrorService) {
+  constructor(private errorService: ErrorService,
+              private translate: TranslateService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -19,10 +21,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       .pipe(catchError(error => {
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
-            return throwError(`Server is offline`);
+            return throwError(this.translate.instant('Info.ServerOffline'));
           } else if (error.status === 500) {
             if (environment.production) {
-              return throwError('500 - ServerError');
+              return throwError(this.translate.instant('Info.InternalServerError'));
             } else {
               return throwError(this.errorService.getServerErrorMessage(error));
             }
@@ -34,13 +36,13 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             if (!!msg) {
               return throwError(msg);
             } else {
-              return throwError('Unknown error');
+              return throwError(this.translate.instant('Info.UnknownError'));
             }
           } else {
-            return throwError('Unknown error');
+            return throwError(this.translate.instant('Info.UnknownError'));
           }
         } else {
-          return throwError('Unknown error');
+          return throwError(this.translate.instant('Info.UnknownError'));
         }
       }));
   }

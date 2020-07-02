@@ -1,4 +1,3 @@
-import { Player } from './player.model';
 import { Convertable } from '../shared/convertable.interface';
 
 export class Room implements Convertable<any> {

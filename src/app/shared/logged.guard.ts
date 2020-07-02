@@ -8,7 +8,7 @@ export class LoggedGuard implements CanActivate {
   constructor(private router: Router,
               private authService: AuthService) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.authService.isUserLogged) {
       return true;
     }

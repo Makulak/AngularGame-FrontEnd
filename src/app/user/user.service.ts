@@ -24,13 +24,13 @@ export class UserService {
     });
   }
 
-  requestResetPassword(email: string) {
+  requestResetPassword(email: string): Observable<any> {
     return this.http.post(this.baseUrl + '/request-reset-password', {
       email
     });
   }
 
-  setNewPassword(email: string, password: string, token: string) {
+  setNewPassword(email: string, password: string, token: string): Observable<any> {
     return this.http.post(this.baseUrl + '/confirm-reset-password', {
       email
     });

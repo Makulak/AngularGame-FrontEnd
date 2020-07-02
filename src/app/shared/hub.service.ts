@@ -3,38 +3,39 @@ import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@aspnet
 
 import { environment } from 'src/environments/environment';
 import { LoggerService } from '../core/logger.service';
-import { AuthService } from '../shared/auth.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TicTacToeService {
+export class HubService {
 
-  private get baseUrl() {
-    return environment.baseUrl + 'hub/game';
+  private get baseUrl(): string {
+    return environment.baseUrl + 'hub/potato';
   }
 
-  private hubConnection: HubConnection;
+  private _hubConnection: HubConnection;
+  public get hubConnection(): HubConnection {
+    return this._hubConnection;
+  }
 
   constructor(private logger: LoggerService,
               private authService: AuthService) {
-  }
 
-  public setConnection() {
-    this.hubConnection = new HubConnectionBuilder()
+    this._hubConnection = new HubConnectionBuilder()
       .withUrl(this.baseUrl, { accessTokenFactory: () => this.authService.Token })
       .build();
   }
 
   public startConnection() {
-    if (this.hubConnection.state === HubConnectionState.Disconnected) {
+    if (this.hubConnection.state === HubConnectionState.Connected) {
       return;
     }
 
     this.hubConnection
       .start()
       .then(() => {
-        this.logger.logInformation('Game connection started');
+        this.logger.logInformation('Room connection started');
       });
   }
 
@@ -45,7 +46,7 @@ export class TicTacToeService {
 
     this.hubConnection.stop()
       .then(() => {
-        this.logger.logInformation('Game connection stopped');
+        this.logger.logInformation('Room connection stopped');
       });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 
 import { WaitingRoomService } from '../waiting-room.service';
+import { HubService } from 'src/app/shared/hub.service';
 
 @Component({
   selector: 'app-waiting-room',
@@ -10,14 +10,15 @@ import { WaitingRoomService } from '../waiting-room.service';
 })
 export class WaitingRoomComponent implements OnInit, OnDestroy {
 
-  constructor(private waitingRoomService: WaitingRoomService) { }
+  constructor(private hubService: HubService,
+              private waitingRoomService: WaitingRoomService) { }
 
   ngOnInit(): void {
     this.waitingRoomService.setConnection();
-    this.waitingRoomService.startConnection();
+    this.hubService.startConnection();
   }
 
   ngOnDestroy(): void {
-    this.waitingRoomService.stopConnection();
+    this.hubService.stopConnection();
   }
 }

@@ -1,5 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -7,9 +9,11 @@ import { environment } from 'src/environments/environment';
 })
 export class ErrorService {
 
+  constructor(private translate: TranslateService) { }
+
   getClientErrorMessage(error: Error): string {
       if (!navigator.onLine) {
-          return 'No Internet Connection';
+          return this.translate.instant('Info.NoInternetConnection');
       }
       if (environment.production) {
         return error.message ? error.message : error.toString();

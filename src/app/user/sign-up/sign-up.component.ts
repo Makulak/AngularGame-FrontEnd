@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 import { FormHelperService } from 'src/app/shared/form-helper.service';
 import { UserService } from '../user.service';
 import { MustMatch } from 'src/app/shared/must-match.validator';
 import { AlertService } from 'src/app/shared/alert.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-up',
