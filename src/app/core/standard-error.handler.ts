@@ -23,7 +23,6 @@ export class StandardErrorHandler implements ErrorHandler {
             message = this.errorService.getClientErrorMessage(error);
             this.alertService.showError(message);
         }
-
         this.loggerService.logError(message);
     }
 }

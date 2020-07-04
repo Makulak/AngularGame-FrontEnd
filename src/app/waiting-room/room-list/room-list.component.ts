@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Room } from '../room.model';
@@ -14,7 +15,8 @@ export class RoomListComponent implements OnInit, OnDestroy {
   roomsSub: Subscription;
   rooms: Room[];
 
-  constructor(private waitingRoomService: WaitingRoomService) { }
+  constructor(private waitingRoomService: WaitingRoomService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.roomsSub = this.waitingRoomService.rooms$.subscribe(rooms => {
@@ -27,6 +29,6 @@ export class RoomListComponent implements OnInit, OnDestroy {
   }
 
   roomSelected(roomId: number) {
-    alert(roomId);
+    this.router.navigate(['game/' + roomId]);
   }
 }

@@ -34,8 +34,12 @@ export class WaitingRoomService {
       this.addRoomToList(room);
     });
     this.hubService.hubConnection.on('tryEnterCreatedRoom', (data: any) => {
-      this.tryEnterCreatedRoom(data.roomId);
+      this.navigateToRoom(data.roomId);
     });
+  }
+
+  public enterWaitingRoom(): Promise<void> {
+    return this.hubService.hubConnection.invoke('EnterWaitingRoom');
   }
 
   public getRooms(): Promise<void> {
@@ -48,10 +52,6 @@ export class WaitingRoomService {
 
   public removeRoom(roomId: number): Promise<void> {
     return this.hubService.hubConnection.invoke('RemoveRoom', roomId);
-  }
-
-  public tryEnterRoom(roomId: number): Promise<void> {
-    return this.hubService.hubConnection.invoke('TryEnterRoom', roomId);
   }
 
   private updateRoomsList(data: Room[]) {
@@ -77,7 +77,7 @@ export class WaitingRoomService {
     this.roomsSubj.next(rooms);
   }
 
-  private tryEnterCreatedRoom(roomId: number) {
+  private navigateToRoom(roomId: number) {
     this.router.navigate(['game/' + roomId]);
   }
 }

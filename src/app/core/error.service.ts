@@ -18,7 +18,7 @@ export class ErrorService {
       if (environment.production) {
         return error.message ? error.message : error.toString();
       } else {
-        return error.message + error.stack;
+        return error.message;
       }
   }
 
