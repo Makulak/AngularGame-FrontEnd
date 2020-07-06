@@ -33,7 +33,7 @@ export class WaitingRoomService {
       const room = new Room().convertFrom(data);
       this.addRoomToList(room);
     });
-    this.hubService.hubConnection.on('tryEnterCreatedRoom', (data: any) => {
+    this.hubService.hubConnection.on('navigateToRoom', (data: any) => {
       this.navigateToRoom(data.roomId);
     });
   }
@@ -50,7 +50,7 @@ export class WaitingRoomService {
     return this.hubService.hubConnection.invoke('CreateRoom', { name: roomName, password } );
   }
 
-  public removeRoom(roomId: number): Promise<void> {
+  public removeRoom(roomId: string): Promise<void> {
     return this.hubService.hubConnection.invoke('RemoveRoom', roomId);
   }
 
@@ -77,7 +77,8 @@ export class WaitingRoomService {
     this.roomsSubj.next(rooms);
   }
 
-  private navigateToRoom(roomId: number) {
+  private navigateToRoom(roomId: string) {
+    this.logger.logInformation('Navigate to room');
     this.router.navigate(['game/' + roomId]);
   }
 }

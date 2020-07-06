@@ -39,7 +39,7 @@ export class HubService {
     return this.hubConnection
       .start()
       .then(() => {
-        this.logger.logInformation('Room connection started');
+        this.logger.logInformation('Hub connection started');
       });
   }
 

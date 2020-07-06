@@ -13,12 +13,12 @@ export class GameService {
   }
 
   public setConnection() {
-
     this.hubService.hubConnection.on('', (data: any) => {
     });
   }
 
-  public tryEnterGame(roomId: number, password: string = null): Promise<void> {
+  public tryEnterGame(roomId: string, password: string = null): Promise<void> {
+    this.logger.logInformation('Entering game');
     return this.hubService.hubConnection.invoke('tryEnterGame', roomId, password);
   }
 }

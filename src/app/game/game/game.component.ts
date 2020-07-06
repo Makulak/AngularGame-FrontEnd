@@ -18,7 +18,7 @@ export class GameComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
-    const roomId: number = +this.route.snapshot.paramMap.get('roomId');
+    const roomId: string = this.route.snapshot.paramMap.get('roomId');
 
     this.gameService.setConnection();
 
@@ -31,7 +31,7 @@ export class GameComponent implements OnInit {
     }
   }
 
-  tryEnterGame(roomId: number) {
+  tryEnterGame(roomId: string) {
     this.gameService.tryEnterGame(roomId).catch((reason) => {
       this.router.navigate(['waiting-room']);
       throw reason;

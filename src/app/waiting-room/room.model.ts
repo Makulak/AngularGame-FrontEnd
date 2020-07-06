@@ -2,7 +2,7 @@ import { Convertable } from '../shared/convertable.interface';
 
 export class Room implements Convertable<any> {
 
-  id: number;
+  id: string;
   name: string;
   status: string;
   playersCount: number;
