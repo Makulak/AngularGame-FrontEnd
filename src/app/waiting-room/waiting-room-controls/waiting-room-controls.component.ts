@@ -37,9 +37,9 @@ export class WaitingRoomControlsComponent implements OnInit {
     this.waitingRoomService.createRoom(this.form.name.value, this.form.password.value);
   }
 
-  onRemoveRoom(id: string) {
-    this.waitingRoomService.removeRoom(id);
-  }
+  // onRemoveRoom(id: string) {
+  //   this.waitingRoomService.removeRoom(id);
+  // }
 
   getErrorMessage(control: AbstractControl): string {
     return this.formHelper.getErrorMessage(control);

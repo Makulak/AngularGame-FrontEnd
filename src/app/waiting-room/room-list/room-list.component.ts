@@ -28,7 +28,9 @@ export class RoomListComponent implements OnInit, OnDestroy {
     this.roomsSub.unsubscribe();
   }
 
-  roomSelected(roomId: number) {
-    this.router.navigate(['game/' + roomId]);
+  roomSelected(roomId: string) {
+    this.waitingRoomService.tryEnterRoom(roomId, null).then(() => // TODO: Password
+      this.router.navigate(['game/' + roomId])
+    );
   }
 }

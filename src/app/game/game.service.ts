@@ -16,9 +16,4 @@ export class GameService {
     this.hubService.hubConnection.on('', (data: any) => {
     });
   }
-
-  public tryEnterGame(roomId: string, password: string = null): Promise<void> {
-    this.logger.logInformation('Entering game');
-    return this.hubService.hubConnection.invoke('tryEnterGame', roomId, password);
-  }
 }
