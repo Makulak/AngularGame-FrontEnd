@@ -22,6 +22,11 @@ export class GameComponent implements OnInit, OnDestroy {
     const roomId: string = this.route.snapshot.paramMap.get('roomId');
 
     this.gameService.setConnection();
+    this.hubService.startConnection();
+
+    this.waitingRoomService.tryEnterRoom(roomId, null).catch(() => { // TODO: Password
+      this.router.navigate(['/waiting-room']);
+    });
   }
 
   ngOnDestroy(): void {
