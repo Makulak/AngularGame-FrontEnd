@@ -25,6 +25,14 @@ export class WaitingRoomService {
     this.selectedRoomId = undefined;
   }
 
+  public unsetConnection() {
+    this.hubService.hubConnection.off('updateRoomsList');
+    this.hubService.hubConnection.off('removeRoomFromList');
+    this.hubService.hubConnection.off('addRoomToList');
+    this.hubService.hubConnection.off('updateRoomOnList');
+    this.hubService.hubConnection.off('navigateToRoom');
+  }
+
   public setConnection() {
     this.hubService.hubConnection.on('updateRoomsList', (data: any[]) => {
       const rooms = data.map(room => new Room().convertFrom(room));
@@ -109,7 +117,7 @@ export class WaitingRoomService {
       rooms[idx] = Object.assign({}, data);
     }
 
-    return rooms;
+    this.roomsSubj.next(rooms);
   }
 
   private navigateToRoom(roomId: string) {
